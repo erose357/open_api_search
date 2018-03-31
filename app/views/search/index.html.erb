@@ -1,8 +1,17 @@
 <h1>Characters</h1>
-<ul>
+<table>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <body>
   <% @characters.each do |character| %>
-    <li><%= character.name %></li>
-    <li><%= character.description %></li>
-    <li><%= image_tag src=character.image %></li>
+    <tr>
+      <td><%= image_tag src=character.image, size: "50x50", alt: "#{character.name} image" %></td>
+      <td><%= character.name %></td>
+      <td><%= character.description %></td>
+    </tr>
   <% end %>
-</ul>
+  </body>
+</table>
