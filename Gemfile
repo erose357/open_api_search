@@ -38,7 +38,7 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'shoulda-matchers'
-  gem 'vcr'
+  gem 'vcr', '~> 3.0.3'
   gem 'webmock'
 end
 
