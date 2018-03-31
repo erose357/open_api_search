@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>OpenApiSearch</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>OpenApiSearch</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <nav>
+      <%= form_tag :search, method: :get do %>
+        <%= text_field_tag :name, "Search by Name..." %>
+        <%= submit_tag "Search" %>
+      <% end %>
+    </nav>
 
-<%= yield %>
+    <%= yield %>
 
-</body>
+  </body>
 </html>
