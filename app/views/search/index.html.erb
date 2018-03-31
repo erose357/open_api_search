@@ -1,0 +1,8 @@
+<h1>Characters</h1>
+<ul>
+  <% @characters.each do |character| %>
+    <li><%= character.name %></li>
+    <li><%= character.description %></li>
+    <li><%= image_tag src=character.image %></li>
+  <% end %>
+</ul>
