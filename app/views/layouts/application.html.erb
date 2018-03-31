@@ -13,6 +13,17 @@
         <%= submit_tag "Search" %>
       <% end %>
     </nav>
+    <h2>Previous Searches</h2>
+    <div>
+      <ul>
+      <% @searches.each do |search| %>
+        <li>
+          <%= link_to search.search_term, search_path(search) %>
+          <p>search count: <%= search.count %></p>
+        </li>
+      <% end %>
+      </ul>
+    </div>
 
     <%= yield %>
 
