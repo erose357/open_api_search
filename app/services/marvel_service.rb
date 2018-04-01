@@ -25,12 +25,6 @@ class MarvelService
   end
 
   private
-    def auth_hash
-      timestamp = Time.now.to_s
-      { ts: timestamp,
-        ts_key_hash: Digest::MD5.hexdigest(timestamp + ENV['marvel_private_key'] + ENV['marvel_public_key']) }
-    end
-
     def characters_url
       @conn.get("characters?nameStartsWith=#{@name}&apikey=#{ENV['marvel_public_key']}&hash=#{auth_hash[:ts_key_hash]}&ts=#{auth_hash[:ts]}")
     end
@@ -39,9 +33,9 @@ class MarvelService
       JSON.parse(characters_url.body, symbolize_names: true)[:data][:results]
     end
 
-    #def auth_hash
-      #timestamp = Time.now.to_s
-      #{ ts: timestamp,
-        #ts_key_hash: Digest::MD5.hexdigest(timestamp + ENV['marvel_private_key'] + ENV['marvel_public_key']) }
-    #end
+    def auth_hash
+      timestamp = Time.now.to_s
+      { ts: timestamp,
+        ts_key_hash: Digest::MD5.hexdigest(timestamp + ENV['marvel_private_key'] + ENV['marvel_public_key']) }
+    end
 end
