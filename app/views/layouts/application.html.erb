@@ -18,8 +18,8 @@
       <ul>
       <% @searches.each do |search| %>
         <li>
-          <%= link_to search.search_term, search_path(search) %>
-          <p>search count: <%= search.count %></p>
+          <%= link_to search.search_term, search_path(search.search_term) %>
+          <p>search count: <%= search.search_count %></p>
         </li>
       <% end %>
       </ul>
