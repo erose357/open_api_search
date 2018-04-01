@@ -5,6 +5,13 @@ class MarvelService
 
   def initialize(name)
     @name = name
+    @conn = Faraday.new(:url => 'http://gateway.marvel.com/v1/public/') do |faraday|
+      faraday.response :logger do |logger|
+        logger.filter(/(apikey=)(\w+)/,'\1[REMOVED]')
+        logger.filter(/(hash=)(\w+)/,'\1[REMOVED]')
+      end
+      faraday.adapter Faraday.default_adapter
+    end
   end
 
   def characters_list
@@ -25,7 +32,7 @@ class MarvelService
     end
 
     def characters_url
-      Faraday.get("http://gateway.marvel.com/v1/public/characters?nameStartsWith=#{@name}&apikey=#{ENV['marvel_public_key']}&hash=#{auth_hash[:ts_key_hash]}&ts=#{auth_hash[:ts]}")
+      @conn.get("characters?nameStartsWith=#{@name}&apikey=#{ENV['marvel_public_key']}&hash=#{auth_hash[:ts_key_hash]}&ts=#{auth_hash[:ts]}")
     end
 
     def parse_json
