@@ -7,12 +7,15 @@ class MarvelService
   def initialize(name)
     @name = name
     @conn = Faraday.new(:url => 'http://gateway.marvel.com/v1/public/') do |faraday|
+      #faraday.response :logger, @logger, :bodies => true
       faraday.response(:logger, @logger, :bodies => true) do |logger|
         logger.filter(/(apikey=)(\w+)/,'\1[REMOVED]')
-        logger.filter(/(hash=)(\w+)/,'\1[REMOVED]')
-      end
+        #logger.filter(/(hash=)(\w+)/,'\1[REMOVED]')
+      #end
       faraday.adapter Faraday.default_adapter
     end
+    @ts = Time.now.to_s
+    @ts_key_hash = Digest::MD5.hexdigest(@ts + ENV['marvel_private_key'] + ENV['marvel_public_key'])
   end
 
   def characters_list
@@ -26,17 +29,21 @@ class MarvelService
   end
 
   private
+    #def characters_url
+      #@conn.get("characters?nameStartsWith=#{@name}&apikey=#{ENV['marvel_public_key']}&hash=#{auth_hash[:ts_key_hash]}&ts=#{auth_hash[:ts]}")
+    #end
     def characters_url
-      @conn.get("characters?nameStartsWith=#{@name}&apikey=#{ENV['marvel_public_key']}&hash=#{auth_hash[:ts_key_hash]}&ts=#{auth_hash[:ts]}")
+      puts @ts
+      @conn.get("characters?nameStartsWith=#{@name}&apikey=#{ENV['marvel_public_key']}&hash=#{@ts_key_hash}&ts=#{@ts}")
     end
 
     def parse_json
       JSON.parse(characters_url.body, symbolize_names: true)[:data][:results]
     end
 
-    def auth_hash
-      timestamp = Time.now.to_s
-      { ts: timestamp,
-        ts_key_hash: Digest::MD5.hexdigest(timestamp + ENV['marvel_private_key'] + ENV['marvel_public_key']) }
-    end
+    #def auth_hash
+      #timestamp = Time.now.to_s
+      #{ ts: timestamp,
+        #ts_key_hash: Digest::MD5.hexdigest(timestamp + ENV['marvel_private_key'] + ENV['marvel_public_key']) }
+    #end
 end
