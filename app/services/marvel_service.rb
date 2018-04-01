@@ -11,7 +11,7 @@ class MarvelService
       faraday.response(:logger, @logger, :bodies => true) do |logger|
         logger.filter(/(apikey=)(\w+)/,'\1[REMOVED]')
         #logger.filter(/(hash=)(\w+)/,'\1[REMOVED]')
-      #end
+      end
       faraday.adapter Faraday.default_adapter
     end
     @ts = Time.now.to_s
