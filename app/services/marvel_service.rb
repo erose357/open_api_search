@@ -6,7 +6,7 @@ class MarvelService
   def initialize(name)
     @name = name
     @conn = Faraday.new(:url => 'http://gateway.marvel.com/v1/public/') do |faraday|
-      faraday.response :logger do |logger|
+      faraday.response(:logger, @logger, :bodies => true) do |logger|
         logger.filter(/(apikey=)(\w+)/,'\1[REMOVED]')
         logger.filter(/(hash=)(\w+)/,'\1[REMOVED]')
       end
