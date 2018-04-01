@@ -1,3 +1,4 @@
+require 'time'
 require 'digest/md5'
 
 class MarvelService
