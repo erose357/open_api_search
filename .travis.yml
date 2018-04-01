@@ -1,3 +1,0 @@
-language: ruby
-  1 rvm:
-  2 - 2.4.1
