@@ -5,7 +5,7 @@ class Search < ActiveRecord::Base
     if search = find_by(search_term: search_name)
       increment_counter(:search_count, search.id)
     else
-      new(search_term: search_name)
+      create(search_term: search_name)
     end
   end
 end
