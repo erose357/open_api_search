@@ -1,8 +1,10 @@
 class SearchController < ApplicationController
   def index
     search_name = params[:name] || params[:format]
-    @searches = Search.all
+    @searches = order_previous_searches({order: params[:order]})
     @characters = MarvelService.new(search_name).characters_list
-    Search.update_or_create(search_name)
+    if params[:order].nil?
+      Search.update_or_create(search_name)
+    end
   end
 end

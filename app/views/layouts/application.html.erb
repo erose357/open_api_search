@@ -10,16 +10,22 @@
     <nav>
       <%= form_tag :search, method: :get do %>
         <%= text_field_tag :name, "Search by Name..." %>
-        <%= submit_tag "Search" %>
+        <%= submit_tag "Search", :name => nil %>
       <% end %>
     </nav>
     <h2>Previous Searches</h2>
+    <h3>Sort by:</h3>
+    <%#= link_to "date", root_path({order: 'date'}) %>
+    <%= link_to "date", {:controller => controller_name, :action => action_name, :order => 'date', :name => params[:name], :format => params[:format]} %>
+    <%= link_to "count", {:controller => controller_name, :action => action_name, :order => 'count', :name => params[:name], :format => params[:format]} %>
+    <%= link_to "search", {:controller => controller_name, :action => action_name, :order => 'search', :name => params[:name], :format => params[:format]} %>
     <div>
       <ul>
       <% @searches.each do |search| %>
         <li>
           <%= link_to search.search_term, search_path(search.search_term) %>
           <p>search count: <%= search.search_count %></p>
+          <p>last searched: <%= search.updated_at %></p>
         </li>
       <% end %>
       </ul>
