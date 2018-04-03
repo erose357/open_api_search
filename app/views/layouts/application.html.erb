@@ -9,8 +9,8 @@
   <body>
     <nav>
       <%= form_tag :search, method: :get do %>
-        <%= text_field_tag :name, "Search by Name..." %>
-        <%= submit_tag "Search", :name => nil %>
+        <%= text_field_tag :title, "Search by title..." %>
+        <%= submit_tag "Search" %>
       <% end %>
     </nav>
     <h2>Previous Searches</h2>
