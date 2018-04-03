@@ -3,7 +3,7 @@ class Search < ActiveRecord::Base
 
   def self.update_or_create(search_name)
     if search = find_by(search_term: search_name)
-      increment_counter(:search_count, search.id)
+      search.update(search_count: search.search_count += 1)
     else
       create(search_term: search_name)
     end

@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  def order_previous_searches(order = {})
-    case order[:order]
+  def order_previous_searches(order = nil)
+    case order
     when 'date'
       Search.all.order(updated_at: :desc)
     when 'count'

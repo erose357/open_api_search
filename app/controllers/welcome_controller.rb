@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @searches = order_previous_searches({order: params[:order]})
+    @searches = order_previous_searches(params[:order])
   end
 end

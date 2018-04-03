@@ -15,10 +15,9 @@
     </nav>
     <h2>Previous Searches</h2>
     <h3>Sort by:</h3>
-    <%#= link_to "date", root_path({order: 'date'}) %>
-    <%= link_to "date", {:controller => controller_name, :action => action_name, :order => 'date', :name => params[:name], :format => params[:format]} %>
-    <%= link_to "count", {:controller => controller_name, :action => action_name, :order => 'count', :name => params[:name], :format => params[:format]} %>
-    <%= link_to "search", {:controller => controller_name, :action => action_name, :order => 'search', :name => params[:name], :format => params[:format]} %>
+    <%= link_to "date", {:controller => controller_name, :action => action_name, :order => 'date', :title => params[:title], :format => params[:format]} %>
+    <%= link_to "count", {:controller => controller_name, :action => action_name, :order => 'count', :title => params[:title], :format => params[:format]} %>
+    <%= link_to "search", {:controller => controller_name, :action => action_name, :order => 'search', :title => params[:title], :format => params[:format]} %>
     <div>
       <ul>
       <% @searches.each do |search| %>

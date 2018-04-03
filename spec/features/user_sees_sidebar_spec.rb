@@ -44,7 +44,7 @@ RSpec.feature "User sees sidebar" do
       expect(page).to have_css('ul li', :text => 'fight club', :count => 1)
       expect(page).to have_css('ul li', :text => 'office space', :count => 1)
 
-    VCR.use_cassette('sidebar-link-repeat', :match_requests_on => [:host]) do
+    VCR.use_cassette('sidebar-link-repeat') do
 
       click_link ('fight club')
 
