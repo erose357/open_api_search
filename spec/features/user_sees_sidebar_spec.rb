@@ -9,7 +9,7 @@ RSpec.feature "User sees sidebar" do
     visit '/'
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('Previous Searches')
+    expect(page).to have_content('Search History')
     expect(page).to have_link('fight club')
     expect(page).to have_css('ul li p', :text => 'search count: 1', :count=> 3)
     expect(page).to have_link('batman')
@@ -21,7 +21,7 @@ RSpec.feature "User sees sidebar" do
       visit '/'
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content('Previous Searches')
+      expect(page).to have_content('Search History')
       expect(page).to have_link('office space')
 
       click_link('office space')
@@ -39,7 +39,7 @@ RSpec.feature "User sees sidebar" do
       visit '/'
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content('Previous Searches')
+      expect(page).to have_content('Search History')
       expect(page).to have_css('ul li', :text => 'batman', :count => 1)
       expect(page).to have_css('ul li', :text => 'fight club', :count => 1)
       expect(page).to have_css('ul li', :text => 'office space', :count => 1)

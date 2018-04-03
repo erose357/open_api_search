@@ -7,6 +7,10 @@ RSpec.describe Search, type: :model do
     it { is_expected.to validate_uniqueness_of(:search_term) }
   end
 
+  describe 'Associations' do
+    it { is_expected.to have_many(:past_searches) }
+  end
+
   describe 'Class methods' do
     describe '.update_or_create' do
       it 'updates the search_count of an existing record' do
