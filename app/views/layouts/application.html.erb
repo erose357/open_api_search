@@ -32,10 +32,12 @@
     <div>
       <% if @search %>
         <h4>Search Information</h4>
-        <p class="search-count">Total Search Count: <%= @search.search_count %></p>
+        <p><b><%= @search.search_term %></b></p>
+        <p>Past Searches:</p>
+        <p>Total Search Count: <%= @search.search_count %></p>
         <ul>
-          <% @search.past_searches.each do |past_search| %>
-            <li class="past-searches">past_search.created_at</li>
+          <% @search.past_searches.reverse.each do |past_search| %>
+            <li class="past-searches"><%= past_search.created_at %></li>
           <% end %>
         </ul>
       <% end %>
