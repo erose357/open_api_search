@@ -40,24 +40,24 @@ RSpec.feature "User sees sidebar" do
 
       expect(current_path).to eq(root_path)
       expect(page).to have_content('Previous Searches')
-      expect(page).to have_css('ul li', :text => 'cyclops', :count => 1)
-      expect(page).to have_css('ul li', :text => 'wolverine', :count => 1)
-      expect(page).to have_css('ul li', :text => 'Juggernaut', :count => 1)
+      expect(page).to have_css('ul li', :text => 'batman', :count => 1)
+      expect(page).to have_css('ul li', :text => 'fight club', :count => 1)
+      expect(page).to have_css('ul li', :text => 'office space', :count => 1)
 
     VCR.use_cassette('sidebar-link-repeat', :match_requests_on => [:host]) do
 
-      click_link ('Juggernaut')
+      click_link ('fight club')
 
-      expect(page).to have_css('ul li', :text=> 'Juggernaut', :count => 1)
-      expect(page).to have_css('ul li', :text => 'Juggernaut search count: 2', :count => 1)
+      expect(page).to have_css('ul li', :text=> 'fight club', :count => 1)
+      expect(page).to have_css('ul li', :text => 'fight club search count: 2', :count => 1)
     end
 
     VCR.use_cassette('sidebar-link-repeat', :match_requests_on => [:host]) do
 
-      click_link ('Juggernaut')
+      click_link ('fight club')
 
-      expect(page).to have_css('ul li', :text=> 'Juggernaut', :count => 1)
-      expect(page).to have_css('ul li', :text => 'Juggernaut search count: 3', :count => 1)
+      expect(page).to have_css('ul li', :text=> 'fight club', :count => 1)
+      expect(page).to have_css('ul li', :text => 'fight club search count: 3', :count => 1)
     end
   end
 end
