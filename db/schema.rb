@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180401154532) do
+ActiveRecord::Schema.define(version: 20180403191858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "past_searches", force: :cascade do |t|
+    t.integer  "search_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "past_searches", ["search_id"], name: "index_past_searches_on_search_id", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.string   "search_term"
@@ -23,4 +31,5 @@ ActiveRecord::Schema.define(version: 20180401154532) do
     t.datetime "updated_at",               null: false
   end
 
+  add_foreign_key "past_searches", "searches"
 end

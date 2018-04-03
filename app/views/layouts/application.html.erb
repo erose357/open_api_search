@@ -13,16 +13,34 @@
         <%= submit_tag "Search" %>
       <% end %>
     </nav>
-    <h2>Previous Searches</h2>
+    <h2>Search History</h2>
+    <h3>Sort by:</h3>
+    <%= link_to "date", {:controller => controller_name, :action => action_name, :order => 'date', :title => params[:title], :format => params[:format]} %>
+    <%= link_to "count", {:controller => controller_name, :action => action_name, :order => 'count', :title => params[:title], :format => params[:format]} %>
+    <%= link_to "search", {:controller => controller_name, :action => action_name, :order => 'search', :title => params[:title], :format => params[:format]} %>
     <div>
       <ul>
       <% @searches.each do |search| %>
         <li>
-          <%= link_to search.search_term, search_path(search.search_term) %>
-          <p>search count: <%= search.search_count %></p>
+          <%= link_to search.search_term, search_path(search.search_term), class: 'search-term' %>
+          <p class="count">search count: <%= search.search_count %></p>
+          <p class="last-searched">last searched: <%= search.updated_at %></p>
         </li>
       <% end %>
       </ul>
+    </div>
+    <div>
+      <% if @search %>
+        <h4>Search Information</h4>
+        <p><b><%= @search.search_term %></b></p>
+        <p>Past Searches:</p>
+        <p>Total Search Count: <%= @search.search_count %></p>
+        <ul>
+          <% @search.past_searches.reverse.each do |past_search| %>
+            <li class="past-searches"><%= past_search.created_at %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
 
     <%= yield %>

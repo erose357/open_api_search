@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @searches = Search.all
+    @searches = order_previous_searches(params[:order])
   end
 end

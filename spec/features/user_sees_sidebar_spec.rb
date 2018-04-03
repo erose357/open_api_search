@@ -9,7 +9,7 @@ RSpec.feature "User sees sidebar" do
     visit '/'
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('Previous Searches')
+    expect(page).to have_content('Search History')
     expect(page).to have_link('fight club')
     expect(page).to have_css('ul li p', :text => 'search count: 1', :count=> 3)
     expect(page).to have_link('batman')
@@ -21,7 +21,7 @@ RSpec.feature "User sees sidebar" do
       visit '/'
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content('Previous Searches')
+      expect(page).to have_content('Search History')
       expect(page).to have_link('office space')
 
       click_link('office space')
@@ -32,6 +32,32 @@ RSpec.feature "User sees sidebar" do
       expect(page).to have_css('td.title', count: 2)
       expect(page).to have_css('td.overview', count: 2)
       expect(page).to have_css('td.release-date', count: 2)
+    end
+  end
+
+  scenario "clicking previous search links increases count but does not add a new search record" do
+      visit '/'
+
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content('Search History')
+      expect(page).to have_css('ul li', :text => 'batman', :count => 1)
+      expect(page).to have_css('ul li', :text => 'fight club', :count => 1)
+      expect(page).to have_css('ul li', :text => 'office space', :count => 1)
+
+    VCR.use_cassette('sidebar-link-repeat') do
+
+      click_link ('fight club')
+
+      expect(page).to have_css('ul li', :text=> 'fight club', :count => 1)
+      expect(page).to have_css('ul li', :text => 'fight club search count: 2', :count => 1)
+    end
+
+    VCR.use_cassette('sidebar-link-repeat', :match_requests_on => [:host]) do
+
+      click_link ('fight club')
+
+      expect(page).to have_css('ul li', :text=> 'fight club', :count => 1)
+      expect(page).to have_css('ul li', :text => 'fight club search count: 3', :count => 1)
     end
   end
 end
