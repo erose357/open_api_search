@@ -12,7 +12,7 @@ RSpec.feature "User can search" do
       expect(current_path).to eq(search_path)
 
       expect(page).to have_content('Fight Club')
-      expect(page).to have_content("A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground fight clubs forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.")
+      expect(page).to have_content("A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.")
       expect(page).to have_css('td.title', count: 18)
       expect(page).to have_css('td.overview', count: 18)
       expect(page).to have_css('td.release-date', count: 18)
