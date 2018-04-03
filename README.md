@@ -9,7 +9,7 @@ Open API Search is a simple web app that allows users to search for movies by fu
 
 `git clone git@github.com:erose357/open_api_search.git` 
 
-install [figaro](https://github.com/laserlemon/figaro) to store API keys  
+#### install [figaro](https://github.com/laserlemon/figaro) to store API keys  
 `bundle exec figaro install`
 
 #### Database creation
