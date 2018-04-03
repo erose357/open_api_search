@@ -29,9 +29,9 @@ RSpec.feature "User sees sidebar" do
       expect(current_path).to eq(search_path(search_3.search_term))
       expect(page).to have_content('Office Space')
       expect(page).to have_content('1999-02-19')
-      expect(page).to have_css('td.title', count: 2)
-      expect(page).to have_css('td.overview', count: 2)
-      expect(page).to have_css('td.release-date', count: 2)
+      expect(page).to have_css('p.title', count: 2)
+      expect(page).to have_css('p.overview', count: 2)
+      expect(page).to have_css('p.release-date', count: 2)
     end
   end
 

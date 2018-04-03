@@ -1,17 +1,11 @@
 <h2>Movies</h2>
-<table>
-  <tr>
-    <th></th>
-    <th>Name</th>
-    <th>Description</th>
-  </tr>
-  <body>
-  <% @movies.each do |movie| %>
-    <tr>
-      <td class="title"><%= movie.title %></td>
-      <td class="release-date"><%= movie.release_date %></td>
-      <td class="overview"><%= movie.overview %></td>
-    </tr>
-  <% end %>
-  </body>
-</table>
+<% @movies.each do |movie| %>
+  <div class="title">
+    <p class="title"><%= movie.title %></p>
+    <p class="release-date">Release Date: <%= movie.release_date %></p>
+  </div>
+  <div class="overview">
+    <p>Overview:</p>
+    <p class="overview"><%= movie.overview %></p>
+  </div>
+<% end %>
