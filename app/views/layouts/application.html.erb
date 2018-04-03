@@ -32,8 +32,8 @@
     <div>
       <% if @search %>
         <h4>Search Information</h4>
-        <p><b><%= @search.search_term %></b></p>
         <p>Past Searches:</p>
+        <p><b><%= @search.search_term %></b></p>
         <p>Total Search Count: <%= @search.search_count %></p>
         <ul>
           <% @search.past_searches.reverse.each do |past_search| %>
