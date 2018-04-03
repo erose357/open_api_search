@@ -6,11 +6,11 @@
     <th>Description</th>
   </tr>
   <body>
-  <% @characters.each do |character| %>
+  <% @movies.each do |movie| %>
     <tr>
-      <td><%= image_tag src=character.image, size: "50x50", alt: "#{character.name} image" %></td>
-      <td><%= character.name %></td>
-      <td><%= character.description %></td>
+      <td class="title"><%= movie.title %></td>
+      <td class="release-date"><%= movie.release_date %></td>
+      <td class="overview"><%= movie.overview %></td>
     </tr>
   <% end %>
   </body>
